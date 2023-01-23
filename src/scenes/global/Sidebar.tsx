@@ -17,8 +17,17 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import React from "react";
+import { ReactNode } from "react";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+type MenuItems = {
+  title: string;
+  to: string;
+  icon: ReactNode;
+  selected: string;
+  setSelected: Function;
+};
+
+const Item: React.FunctionComponent<MenuItems> = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -36,12 +45,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = ({isSidebar}) => {
+const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
+  
   return (
     <Box
       sx={{

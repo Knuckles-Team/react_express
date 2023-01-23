@@ -21,7 +21,7 @@ const Calendar = () => {
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState<any[]>([]);
 
-  const handleDateClick = (selected) => {
+  const handleDateClick = (selected?:any) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
@@ -37,7 +37,7 @@ const Calendar = () => {
     }
   };
 
-  const handleEventClick = (selected) => {
+  const handleEventClick = (selected?:any) => {
     if (
       window.confirm(
         `Are you sure you want to delete the event '${selected.event.title}'`

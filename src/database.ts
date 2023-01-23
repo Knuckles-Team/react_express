@@ -12,7 +12,7 @@ function Postgres() {
 
     client.connect();
 
-    client.query(`Select * from transactions`, (err, res) =>{
+    client.query(`Select * from transactions`, (err?:any, res?:any) =>{
         if(!err){
             console.log(res.rows);
         } else{
