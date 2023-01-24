@@ -5,7 +5,6 @@ ARG PORT=5173
 ENV APPLICATION=$APPLICATION
 ENV HOST=$HOST
 ENV PORT=$PORT
-RUN npm i pg react-scripts
 
 FROM node AS react
 WORKDIR /app
