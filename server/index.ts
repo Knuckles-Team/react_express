@@ -4,8 +4,8 @@ const cors_instance = require("cors");
 const db_pool = require("./db.ts");
 
 //middleware
-app_express.use(cors());
-app_express.use(express.json()); //req.body
+app_express.use(cors_instance());
+app_express.use(express_instance.json()); //req.body
 
 //ROUTES//
 
@@ -14,12 +14,12 @@ app_express.use(express.json()); //req.body
 app_express.post("/transactions", async (req, res) => {
   try {
     const { description } = req.body;
-    const newTodo = await pool.query(
+    const newTransaction = await db_pool.query(
       "INSERT INTO transaction (user) VALUES($1) RETURNING *",
       [description]
     );
 
-    res.json(newTodo.rows[0]);
+    res.json(newTransaction.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -29,8 +29,8 @@ app_express.post("/transactions", async (req, res) => {
 
 app_express.get("/transactions", async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM transactions");
-    res.json(allTodos.rows);
+    const allTransactions = await db_pool.query("SELECT * FROM transactions");
+    res.json(allTransactions.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -41,7 +41,7 @@ app_express.get("/transactions", async (req, res) => {
 app_express.get("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const todo = await pool.query("SELECT * FROM transactions WHERE txId = $1", [
+    const todo = await db_pool.query("SELECT * FROM transactions WHERE txId = $1", [
       id
     ]);
 
@@ -57,7 +57,7 @@ app_express.put("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
-    const updateTodo = await pool.query(
+    const updateTodo = await db_pool.query(
       "UPDATE transactions SET user = $1 WHERE txId = $2",
       [description, id]
     );
@@ -73,7 +73,7 @@ app_express.put("/transactions/:id", async (req, res) => {
 app_express.delete("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteTodo = await pool.query("DELETE FROM transactions WHERE txId = $1", [
+    const deleteTodo = await db_pool.query("DELETE FROM transactions WHERE txId = $1", [
       id
     ]);
     res.json("Todo was deleted!");
