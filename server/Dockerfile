@@ -16,7 +16,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 EXPOSE $PORT
-CMD [ "npm", "run", "dev" ]
+CMD [ "node", "index.js" ]
 
 # FROM ubuntu:latest AS ubuntu_gemini
 # RUN apt update && apt upgrade -y && apt install DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC -y curl wget nano vim dos2unix build-essential gcc
