@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
   const getTransactions = async () => {
     try {
-      const response = await fetch("http://api.arpa/transactions");
+      const response = await fetch("http://api.arpa/api/v1/transactions/");
       const jsonData = await response.json();
       setTransactions(jsonData);
     } catch (err) {
