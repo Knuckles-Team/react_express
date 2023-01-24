@@ -6,6 +6,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - NODE_ENV=development
       - PORT=5173
@@ -20,6 +21,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - NODE_ENV=development
       - PORT=5000
