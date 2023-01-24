@@ -5,7 +5,7 @@ ARG PORT=5173
 ENV APPLICATION=$APPLICATION
 ENV HOST=$HOST
 ENV PORT=$PORT
-RUN npm install nodemon
+RUN npm install -g nodemon
 
 FROM node AS react
 WORKDIR /app
