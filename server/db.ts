@@ -1,11 +1,10 @@
-const Pool = require("pg").Pool;
+const PGPool = require("pg").Pool;
 
-const pool = new Pool({
+const pgpool = new PGPool({
     host: "postgres.arpa",
     user: "postgres",
     port: 5432,
     password: "example",
     database: "db"
 });
-module.exports = pool;
-export {};
+module.exports = pgpool;
