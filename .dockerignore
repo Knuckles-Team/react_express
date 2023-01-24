@@ -1,7 +1,6 @@
-package.json
-package-lock.json
+*package-lock.json
 *.md
-LICENSE
-Dockerfile
-.dockerignore
-node_modules
+*LICENSE
+*Dockerfile
+*.dockerignore
+*node_modules
