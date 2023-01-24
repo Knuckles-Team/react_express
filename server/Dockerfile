@@ -10,4 +10,4 @@ FROM node AS react
 WORKDIR /app
 COPY . .
 RUN npm install
-CMD [ "node", "index.ts" ]
+CMD [ "node", "start" ]
