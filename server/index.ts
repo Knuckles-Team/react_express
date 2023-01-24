@@ -1,5 +1,5 @@
 const express_instance = require("express");
-const app_express = express();
+const app_express = express_instance();
 const cors_instance = require("cors");
 const db_pool = require("./db");
 
