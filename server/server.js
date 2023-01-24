@@ -22,7 +22,7 @@ app.get("/api/v1/transactions", async (req, res) => {
       status: "success",
       results: restaurantRatingsData.rows.length,
       data: {
-        restaurants: restaurantRatingsData.rows,
+        transactions: restaurantRatingsData.rows,
       },
     });
   } catch (err) {
@@ -35,7 +35,7 @@ app.get("/api/v1/transactions/:id", async (req, res) => {
   console.log(req.params.id);
 
   try {
-    const restaurant = await db.query(
+    const transactions = await db.query(
       "select * from transactions where id = $1",
       [req.params.id]
     );
@@ -50,7 +50,7 @@ app.get("/api/v1/transactions/:id", async (req, res) => {
     res.status(200).json({
       status: "succes",
       data: {
-        restaurant: restaurant.rows[0],
+        transactions: transactions.rows[0],
         reviews: reviews.rows,
       },
     });
