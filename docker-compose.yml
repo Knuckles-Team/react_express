@@ -11,7 +11,7 @@ services:
       - NODE_ENV=development
       - PORT=5173
       - HOST=0.0.0.0
-      - VIRTUAL_HOST=react.arpa
+      - VIRTUAL_HOST=react-poc.arpa
       - VIRTUAL_PORT=5173
     ports:
       - '5173:5173'

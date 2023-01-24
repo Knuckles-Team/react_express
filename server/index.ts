@@ -1,17 +1,17 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const pool = require("./db");
+const express_instance = require("express");
+const app_express = express();
+const cors_instance = require("cors");
+const db_pool = require("./db");
 
 //middleware
-app.use(cors());
-app.use(express.json()); //req.body
+app_express.use(cors());
+app_express.use(express.json()); //req.body
 
 //ROUTES//
 
 //create a transaction
 
-app.post("/transactions", async (req, res) => {
+app_express.post("/transactions", async (req, res) => {
   try {
     const { description } = req.body;
     const newTodo = await pool.query(
@@ -27,7 +27,7 @@ app.post("/transactions", async (req, res) => {
 
 //get all todos
 
-app.get("/transactions", async (req, res) => {
+app_express.get("/transactions", async (req, res) => {
   try {
     const allTodos = await pool.query("SELECT * FROM transactions");
     res.json(allTodos.rows);
@@ -38,7 +38,7 @@ app.get("/transactions", async (req, res) => {
 
 //get a todo
 
-app.get("/transactions/:id", async (req, res) => {
+app_express.get("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const todo = await pool.query("SELECT * FROM transactions WHERE txId = $1", [
@@ -53,7 +53,7 @@ app.get("/transactions/:id", async (req, res) => {
 
 //update a todo
 
-app.put("/transactions/:id", async (req, res) => {
+app_express.put("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
@@ -70,7 +70,7 @@ app.put("/transactions/:id", async (req, res) => {
 
 //delete a todo
 
-app.delete("/transactions/:id", async (req, res) => {
+app_express.delete("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteTodo = await pool.query("DELETE FROM transactions WHERE txId = $1", [
@@ -82,8 +82,6 @@ app.delete("/transactions/:id", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
+app_express.listen(5000, () => {
   console.log("server has started on port 5000");
 });
-
-export {};
