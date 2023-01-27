@@ -1,6 +1,5 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
@@ -12,21 +11,27 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [transactions, setTransactions] = useState<any[]>([]);
-  const getTransactions = async () => {
-    try {
-      const response = await fetch("http://api.arpa/api/v1/transactions/");
-      const jsonData = await response.json();
-      setTransactions(jsonData);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      try {
+        const response = await fetch("http://api.arpa/api/v1/transactions/");
+        const jsonData = await response.json();
+        setTransactions(jsonData['data']['transactions']);
+        console.log(transactions);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getTransactions();
+  }, []);
   console.log(transactions);
 
   return (
@@ -195,9 +200,9 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {transactions.map((transaction, id) => (
+          {transactions.map(transaction => (
             <Box
-              key={`${transaction.txId}-${id}`}
+              key={`${transaction.txId}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
