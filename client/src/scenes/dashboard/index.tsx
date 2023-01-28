@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getTransactions = async () => {
       try {
-        const response = await fetch("http://api.arpa/api/v1/transactions/");
+        const response = await fetch("http://react-poc.arpa/api/v1/transactions/");
         const jsonData = await response.json();
         setTransactions(jsonData['data']['transactions']);
         console.log(transactions);
